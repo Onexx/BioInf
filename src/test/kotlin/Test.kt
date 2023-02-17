@@ -12,15 +12,16 @@ class Test {
     private var passedTestsCounter = 0
 
     @Test
-    fun test() {
+    fun testMedianString() {
+        val taskCode = "ba2b"
         var idx = 1
-        for (t in 0..10) {
-            val inputPath = "inputs/input_$idx.txt"
-            val outputPath = "outputs/output_$idx.txt"
+        while (true) {
+            val inputPath = "$taskCode/inputs/input_$idx.txt"
+            val outputPath = "$taskCode/outputs/output_$idx.txt"
             val inputFile = File("src/test/resources/$inputPath")
             val outputFile = File("src/test/resources/$outputPath")
             if (inputFile.exists() && outputFile.exists()) {
-                val result = Solution().run(inputPath)
+                val result = Solution().run("1", inputPath)
                 val expected = this.javaClass.classLoader.getResourceAsStream(outputPath)!!
                     .bufferedReader(Charsets.UTF_8).useLines { it.toList() }
 

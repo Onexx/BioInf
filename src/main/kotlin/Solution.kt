@@ -4,13 +4,17 @@ import java.io.BufferedReader
 class Solution {
     private val output = ArrayList<String>()
 
-    fun run(filepath: String): List<String> {
+    fun run(taskNumber: String, filepath: String): List<String> {
         val inputReader = getFileReader(filepath)
-        solve(inputReader)
+        when (taskNumber){
+            "ba2b" -> solveFirstTask(inputReader)
+            else -> throw IllegalStateException("Task with number [$taskNumber] not found")
+        }
+
         return output
     }
 
-    private fun solve(inputReader: BufferedReader) {
+    private fun solveFirstTask(inputReader: BufferedReader) {
         val k = inputReader.readLine().toInt()
         val dnaStrings = ArrayList<String>()
         do {
