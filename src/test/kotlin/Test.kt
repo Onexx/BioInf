@@ -1,5 +1,6 @@
 import org.junit.Test
 import java.io.File
+import kotlin.test.fail
 
 class Test {
     companion object {
@@ -12,8 +13,16 @@ class Test {
     private var passedTestsCounter = 0
 
     @Test
-    fun testMedianString() {
-        val taskCode = "ba2b"
+    fun medianStringTest() {
+        runTests(taskCode = "ba2b")
+    }
+
+    @Test
+    fun randomizedMotifSearchTest() {
+        runTests(taskCode = "ba2f")
+    }
+
+    private fun runTests(taskCode: String) {
         var idx = 1
         while (true) {
             val inputPath = "$taskCode/inputs/input_$idx.txt"
@@ -21,13 +30,13 @@ class Test {
             val inputFile = File("src/test/resources/$inputPath")
             val outputFile = File("src/test/resources/$outputPath")
             if (inputFile.exists() && outputFile.exists()) {
-                val result = Solution().run("1", inputPath)
+                val result = Solution.run(taskCode, inputPath)
                 val expected = this.javaClass.classLoader.getResourceAsStream(outputPath)!!
                     .bufferedReader(Charsets.UTF_8).useLines { it.toList() }
 
                 if (result == expected) {
                     passedTestsCounter++
-                    println("${ANSI_GREEN}Passed test $idx $ANSI_RESET")
+                    println("${ANSI_GREEN}Passed $taskCode test $idx $ANSI_RESET")
                 } else {
                     failedTestsCounter++
                     val notFound = (expected - result.toSet())
@@ -41,6 +50,7 @@ class Test {
                     println(ANSI_RESET)
                 }
                 idx++
+                Solution.clearOutput()
             } else {
                 break
             }
@@ -54,5 +64,6 @@ class Test {
         println("Passed $passedTestsCounter/${passedTestsCounter + failedTestsCounter} tests")
         println(ANSI_RESET)
         println("########################")
+        if (failedTestsCounter != 0) fail()
     }
 }
