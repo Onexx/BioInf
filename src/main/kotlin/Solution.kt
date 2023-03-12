@@ -1,5 +1,6 @@
 import Util.getFileReader
 import tasks.MedianString
+import tasks.PairedComposition
 import tasks.RandomizedMotifSearch
 
 object Solution {
@@ -10,6 +11,7 @@ object Solution {
         when (taskCode) {
             "ba2b" -> MedianString().solve(inputReader)
             "ba2f" -> RandomizedMotifSearch().solve(inputReader)
+            "ba3j" -> PairedComposition().solve(inputReader)
             else -> throw IllegalStateException("Task with code [$taskCode] not found")
         }
 

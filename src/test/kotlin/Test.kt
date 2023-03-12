@@ -22,6 +22,11 @@ class Test {
         runTests(taskCode = "ba2f")
     }
 
+    @Test
+    fun pairedCompositionTest() {
+        runTests(taskCode = "ba3j")
+    }
+
     private fun runTests(taskCode: String) {
         var idx = 1
         while (true) {
