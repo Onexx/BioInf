@@ -26,7 +26,9 @@ object Solution {
     }
 
     fun writeln(text: Any) {
-        output.add(text.toString())
+        if (output.isEmpty()) output.add("")
+        output[output.lastIndex] = output.last() + text.toString()
+        output.add("")
     }
 
     fun clearOutput() {

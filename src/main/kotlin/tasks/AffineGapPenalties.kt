@@ -1,9 +1,15 @@
 package tasks
 
+import Solution.write
 import Solution.writeln
+import tasks.AffineGapPenalties.SourceType.*
 import java.io.BufferedReader
 
 class AffineGapPenalties {
+    enum class SourceType {
+        INSERTIONS, DELETIONS, MATCHES
+    }
+
     private val blosum62alphabet =
         charArrayOf('A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y')
 
@@ -47,6 +53,7 @@ class AffineGapPenalties {
         val insertions = Array(n + 1) { IntArray(m + 1) }
         val deletions = Array(n + 1) { IntArray(m + 1) }
 
+        val par = Array(3) { Array(n + 1) { Array(m + 1) { MATCHES } } }
 
         for (i in 1..n) {
             matches[i][0] = -openingPenalty - (i - 1) * extensionPenalty
@@ -61,23 +68,61 @@ class AffineGapPenalties {
 
         for (i in 1..n) {
             for (j in 1..m) {
-                insertions[i][j] = maxOf(
-                    insertions[i - 1][j] - extensionPenalty,
-                    matches[i - 1][j] - openingPenalty
+                fun maxWithPar(
+                    type: Int,
+                    insertionsVal: Int = Int.MIN_VALUE,
+                    deletionsVal: Int = Int.MIN_VALUE,
+                    matchesVal: Int = Int.MIN_VALUE
+                ): Int {
+                    val maxVal = maxOf(insertionsVal, deletionsVal, matchesVal)
+                    par[type][i][j] = when (maxVal) {
+                        insertionsVal -> INSERTIONS
+                        deletionsVal -> DELETIONS
+                        else -> MATCHES
+                    }
+                    return maxVal
+                }
+
+                insertions[i][j] = maxWithPar(
+                    0,
+                    insertionsVal = insertions[i - 1][j] - extensionPenalty,
+                    matchesVal = matches[i - 1][j] - openingPenalty
                 )
-                deletions[i][j] = maxOf(
-                    deletions[i][j - 1] - extensionPenalty,
-                    matches[i][j - 1] - openingPenalty
+                deletions[i][j] = maxWithPar(
+                    1,
+                    deletionsVal = deletions[i][j - 1] - extensionPenalty,
+                    matchesVal = matches[i][j - 1] - openingPenalty
                 )
-                matches[i][j] = maxOf(
-                    deletions[i][j],
-                    insertions[i][j],
-                    matches[i - 1][j - 1] + blosum62score(v[i - 1], w[j - 1])
+                matches[i][j] = maxWithPar(
+                    2,
+                    deletionsVal = deletions[i][j],
+                    insertionsVal = insertions[i][j],
+                    matchesVal = matches[i - 1][j - 1] + blosum62score(v[i - 1], w[j - 1])
                 )
             }
         }
         val score = matches[n][m]
         writeln(score)
+
+//        writeln("------------------------")
+//        for (arr in matches) {
+//            for (item in arr) {
+//                write("$item ")
+//            }
+//            writeln("")
+//        }
+        for (i in 0..2) {
+            writeln("--------$i----------------")
+            for (arr in par[i]) {
+                for (item in arr) {
+                    write("${item.name.first()} ")
+                }
+                writeln("")
+            }
+        }
+        val type = 0
+        val x = n - 1
+        val y = m - 1
 
         // TODO add path reconstruction
     }
