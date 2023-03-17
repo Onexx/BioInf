@@ -1,4 +1,5 @@
 import Util.getFileReader
+import tasks.AffineGapPenalties
 import tasks.MedianString
 import tasks.PairedComposition
 import tasks.RandomizedMotifSearch
@@ -12,19 +13,20 @@ object Solution {
             "ba2b" -> MedianString().solve(inputReader)
             "ba2f" -> RandomizedMotifSearch().solve(inputReader)
             "ba3j" -> PairedComposition().solve(inputReader)
+            "ba5j" -> AffineGapPenalties().solve(inputReader)
             else -> throw IllegalStateException("Task with code [$taskCode] not found")
         }
 
         return output
     }
 
-    fun write(text: String) {
+    fun write(text: Any) {
         if (output.isEmpty()) output.add("")
-        output[output.lastIndex] = output.last() + text
+        output[output.lastIndex] = output.last() + text.toString()
     }
 
-    fun writeln(text: String) {
-        output.add(text)
+    fun writeln(text: Any) {
+        output.add(text.toString())
     }
 
     fun clearOutput() {
