@@ -101,29 +101,66 @@ class AffineGapPenalties {
                 )
             }
         }
-        val score = matches[n][m]
-        writeln(score)
 
-//        writeln("------------------------")
-//        for (arr in matches) {
-//            for (item in arr) {
-//                write("$item ")
-//            }
-//            writeln("")
-//        }
-        for (i in 0..2) {
-            writeln("--------$i----------------")
-            for (arr in par[i]) {
-                for (item in arr) {
-                    write("${item.name.first()} ")
+        writeln(matches[n][m])
+
+        var type = 2 // matches
+        var x = n
+        var y = m
+        val result = mutableListOf<SourceType>()
+        while (x != 0 && y != 0) {
+            val sourceType = par[type][x][y]
+            when (type) {
+                0 -> {
+                    x--
+                    if (sourceType == MATCHES) {
+                        type = 2 // matches
+                    } else {
+                        result.add(sourceType)
+                    }
                 }
-                writeln("")
+
+                1 -> {
+                    y--
+                    if (sourceType == MATCHES) {
+                        type = 2 // matches
+                    } else {
+                        result.add(sourceType)
+                    }
+                }
+
+                2 -> {
+                    result.add(sourceType)
+                    when (sourceType) {
+                        INSERTIONS -> type = 0
+                        DELETIONS -> type = 1
+                        MATCHES -> {
+                            x--
+                            y--
+                        }
+                    }
+                }
             }
         }
-        val type = 0
-        val x = n - 1
-        val y = m - 1
-
-        // TODO add path reconstruction
+        result.reverse()
+        // v
+        var ptr = 0
+        result.forEach {
+            when (it) {
+                INSERTIONS -> write(v[ptr++])
+                DELETIONS -> write("-")
+                MATCHES -> write(v[ptr++])
+            }
+        }
+        writeln("")
+        // w
+        ptr = 0
+        result.forEach {
+            when (it) {
+                INSERTIONS -> write("-")
+                DELETIONS -> write(w[ptr++])
+                MATCHES -> write(w[ptr++])
+            }
+        }
     }
 }

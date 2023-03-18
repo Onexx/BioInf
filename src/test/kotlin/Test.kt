@@ -27,6 +27,11 @@ class Test {
         runTests(taskCode = "ba3j")
     }
 
+    @Test
+    fun affineGapPenaltiesTest() {
+        runTests(taskCode = "ba5j")
+    }
+
     private fun runTests(taskCode: String) {
         var idx = 1
         while (true) {
@@ -35,9 +40,9 @@ class Test {
             val inputFile = File("src/test/resources/$inputPath")
             val outputFile = File("src/test/resources/$outputPath")
             if (inputFile.exists() && outputFile.exists()) {
-                val result = Solution.run(taskCode, inputPath)
+                val result = Solution.run(taskCode, inputPath).filter { it.isNotBlank() }
                 val expected = this.javaClass.classLoader.getResourceAsStream(outputPath)!!
-                    .bufferedReader(Charsets.UTF_8).useLines { it.toList() }
+                    .bufferedReader(Charsets.UTF_8).useLines { it.toList() }.filter { it.isNotBlank() }
 
                 if (result == expected) {
                     passedTestsCounter++
