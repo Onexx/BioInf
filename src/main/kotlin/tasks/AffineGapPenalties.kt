@@ -2,10 +2,11 @@ package tasks
 
 import Solution.write
 import Solution.writeln
+import Task
 import tasks.AffineGapPenalties.SourceType.*
 import java.io.BufferedReader
 
-class AffineGapPenalties {
+class AffineGapPenalties : Task {
     enum class SourceType {
         INSERTIONS, DELETIONS, MATCHES
     }
@@ -43,7 +44,7 @@ class AffineGapPenalties {
     }
 
 
-    fun solve(inputReader: BufferedReader) {
+    override fun solve(inputReader: BufferedReader) {
         val v = inputReader.readLine()
         val w = inputReader.readLine()
 

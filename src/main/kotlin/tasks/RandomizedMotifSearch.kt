@@ -1,11 +1,12 @@
 package tasks
 
 import Solution.writeln
+import Task
 import java.io.BufferedReader
 import kotlin.random.Random
 
-class RandomizedMotifSearch {
-    fun solve(inputReader: BufferedReader) {
+class RandomizedMotifSearch : Task {
+    override fun solve(inputReader: BufferedReader) {
         val firstLine = inputReader.readLine().split(' ')
         val k = firstLine[0].toInt()
         val dnaStrings = ArrayList<String>()

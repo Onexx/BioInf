@@ -1,10 +1,11 @@
 package tasks
 
 import Solution.writeln
+import Task
 import java.io.BufferedReader
 
-class PairedComposition {
-    fun solve(inputReader: BufferedReader) {
+class PairedComposition : Task {
+    override fun solve(inputReader: BufferedReader) {
         val firstLine = inputReader.readLine().split(' ')
         val k = firstLine[0].toInt()
         val d = firstLine[1].toInt()

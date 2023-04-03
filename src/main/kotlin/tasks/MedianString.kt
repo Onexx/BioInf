@@ -1,11 +1,12 @@
 package tasks
 
 import Solution.write
+import Task
 import java.io.BufferedReader
 
-class MedianString {
+class MedianString : Task {
 
-    fun solve(inputReader: BufferedReader) {
+    override fun solve(inputReader: BufferedReader) {
         val k = inputReader.readLine().toInt()
         val dnaStrings = ArrayList<String>()
         do {

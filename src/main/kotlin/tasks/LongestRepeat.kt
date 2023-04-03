@@ -1,9 +1,10 @@
 package tasks
 
 import Solution.write
+import Task
 import java.io.BufferedReader
 
-class LongestRepeat {
+class LongestRepeat : Task {
 
     private fun String.countSubstring(substring: String): Int {
         var index = 0
@@ -20,7 +21,7 @@ class LongestRepeat {
         }
     }
 
-    fun solve(inputReader: BufferedReader) {
+    override fun solve(inputReader: BufferedReader) {
         val s = inputReader.readLine()
         for (sz in s.length - 1 downTo 1) {
             val result = s.windowed(sz).find { s.countSubstring(it) > 1 }
