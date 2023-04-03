@@ -1,8 +1,5 @@
 import Util.getFileReader
-import tasks.AffineGapPenalties
-import tasks.MedianString
-import tasks.PairedComposition
-import tasks.RandomizedMotifSearch
+import tasks.*
 
 object Solution {
     private val output = ArrayList<String>()
@@ -14,6 +11,7 @@ object Solution {
             "ba2f" -> RandomizedMotifSearch().solve(inputReader)
             "ba3j" -> PairedComposition().solve(inputReader)
             "ba5j" -> AffineGapPenalties().solve(inputReader)
+            "ba9d" -> LongestRepeat().solve(inputReader)
             else -> throw IllegalStateException("Task with code [$taskCode] not found")
         }
 

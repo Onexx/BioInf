@@ -32,6 +32,11 @@ class Test {
         runTests(taskCode = "ba5j")
     }
 
+    @Test
+    fun longestRepeatTest() {
+        runTests(taskCode = "ba9d")
+    }
+
     private fun runTests(taskCode: String) {
         var idx = 1
         while (true) {
