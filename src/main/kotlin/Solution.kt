@@ -12,6 +12,7 @@ object Solution {
             "ba3j" -> PairedComposition().solve(inputReader)
             "ba5j" -> AffineGapPenalties().solve(inputReader)
             "ba9d" -> LongestRepeat().solve(inputReader)
+            "ba10c" -> Viterbi().solve(inputReader)
             else -> throw IllegalStateException("Task with code [$taskCode] not found")
         }
 

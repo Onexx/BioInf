@@ -37,6 +37,11 @@ class Test {
         runTests(taskCode = "ba9d")
     }
 
+    @Test
+    fun viterbiTest() {
+        runTests(taskCode = "ba10c")
+    }
+
     private fun runTests(taskCode: String) {
         var idx = 1
         while (true) {
