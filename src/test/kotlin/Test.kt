@@ -33,6 +33,11 @@ class Test {
     }
 
     @Test
+    fun shortestTransformationTest() {
+        runTests(taskCode = "ba6d")
+    }
+
+    @Test
     fun longestRepeatTest() {
         runTests(taskCode = "ba9d")
     }

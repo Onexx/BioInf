@@ -11,6 +11,7 @@ object Solution {
             "ba2f" -> RandomizedMotifSearch().solve(inputReader)
             "ba3j" -> PairedComposition().solve(inputReader)
             "ba5j" -> AffineGapPenalties().solve(inputReader)
+            "ba6d" -> ShortestTransformation().solve(inputReader)
             "ba9d" -> LongestRepeat().solve(inputReader)
             "ba10c" -> Viterbi().solve(inputReader)
             else -> throw IllegalStateException("Task with code [$taskCode] not found")
