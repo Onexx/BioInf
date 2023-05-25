@@ -5,7 +5,6 @@ import Task
 import java.io.BufferedReader
 
 class MedianString : Task {
-
     override fun solve(inputReader: BufferedReader) {
         val k = inputReader.readLine().toInt()
         val dnaStrings = ArrayList<String>()

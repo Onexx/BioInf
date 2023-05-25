@@ -5,7 +5,6 @@ import Task
 import java.io.BufferedReader
 
 class LongestRepeat : Task {
-
     private fun String.countSubstring(substring: String): Int {
         var index = 0
         var count = 0

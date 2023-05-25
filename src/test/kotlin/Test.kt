@@ -38,6 +38,11 @@ class Test {
     }
 
     @Test
+    fun additivePhylogenyTest() {
+        runTests(taskCode = "ba7c")
+    }
+
+    @Test
     fun longestRepeatTest() {
         runTests(taskCode = "ba9d")
     }

@@ -2,7 +2,6 @@ import java.io.BufferedReader
 import java.io.InputStream
 
 object Util {
-
     fun getFileReader(filepath: String): BufferedReader {
         val resourceStream: InputStream? = this.javaClass.classLoader.getResourceAsStream(filepath)
         if (resourceStream == null) {
